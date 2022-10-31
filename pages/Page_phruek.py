@@ -118,6 +118,8 @@ with tab2:
     dfplot = dfmap.merge(dfComplated, on='name', how='left', indicator=True)
     # dfplot = dfplot[['geometry']].copy()
     
+    st.write(hello(dfplot['geometry'].info)
+
     complatedChart = alt.Chart(dfplot).mark_geoshape().encode(
         color='proportion:Q',
         tooltip=['name','proportion']
