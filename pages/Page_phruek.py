@@ -5,6 +5,7 @@ import datetime as dt
 import altair as alt
 import toolz
 import geopandas as gpd
+import regex as re
 
 st.header("Overview Performance")
 st.write("Growth Year on Year comparison")
@@ -106,7 +107,7 @@ with tab2:
     # dfReturned = dfpop[dfpop['central_order_status']=='Returned'].groupby(['name'])['proportion'].mean()
     alt.pipe = toolz.curried.pipe
     dfmap = gpd.read_file('https://bit.ly/thaigeojson')
-    import regex python as re
+    
     # dfmap = pd.read_csv('thaigeo.csv')
     # dfmap['geometry'] = gpd.GeoSeries.from_wkt(dfmap['geometry'])
     # dfmap = gpd.GeoDataFrame(dfmap, geometry='geometry')
