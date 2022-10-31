@@ -118,7 +118,7 @@ with tab2:
     dfplot = dfmap.merge(dfComplated, on='name', how='left', indicator=True)
     # dfplot = dfplot[['geometry']].copy()
 
-    alt.Chart(dfplot).mark_geoshape().encode(
+    complatedChart = alt.Chart(dfplot).mark_geoshape().encode(
         color='proportion:Q',
         tooltip=['name','proportion']
     ).properties(
@@ -149,7 +149,7 @@ with tab2:
     st.image('./images/failed-proportion2.svg')
     st.markdown("###### Order failed status 2022")
     st.image('./images/failed-proportion3.svg')
-    # st.altair_chart(complatedChart)
+    st.altair_chart(complatedChart)
 with tab3:
     # USA
     # from vega_datasets import data
