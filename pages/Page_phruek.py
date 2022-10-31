@@ -110,9 +110,9 @@ with tab2:
     # dfmap = gpd.read_file('https://bit.ly/thaigeojson')
     
     dfmap = pd.read_csv('thaigeo.csv')
-    # dfmap['geometry'] = gpd.GeoSeries.from_wkt(dfmap['geometry'])
-    # dfmap = gpd.GeoDataFrame(dfmap, geometry='geometry')
-    dfmap['geometry'] = dfmap.geometry.apply(lambda x: x.wkt).apply(lambda x: re.sub('"(.*)"', '\\1', x))
+    dfmap['geometry'] = gpd.GeoSeries.from_wkt(dfmap['geometry'])
+    dfmap = gpd.GeoDataFrame(dfmap, geometry='geometry')
+    # dfmap['geometry'] = dfmap.geometry.apply(lambda x: x.wkt).apply(lambda x: re.sub('"(.*)"', '\\1', x))
 
     dfmap['name'] = dfmap['name'].apply(lambda x: 'Nong Bua Lamphu' if x == 'Nong Bua Lam Phu' else x)
     dfplot = dfmap.merge(dfComplated, on='name', how='left', indicator=True)
