@@ -107,9 +107,9 @@ with tab2:
     # dfFailed = dfpop[dfpop['central_order_status']=='Failed'].groupby(['name'])['proportion'].mean()
     # dfReturned = dfpop[dfpop['central_order_status']=='Returned'].groupby(['name'])['proportion'].mean()
     alt.pipe = toolz.curried.pipe
-    # dfmap = gpd.read_file('https://bit.ly/thaigeojson')
+    dfmap = gpd.read_file('https://bit.ly/thaigeojson')
     
-    dfmap = pd.read_csv('thaigeo.csv')
+    # dfmap = pd.read_csv('thaigeo.csv')
     dfmap['geometry'] = gpd.GeoSeries.from_wkt(dfmap['geometry'])
     dfmap = gpd.GeoDataFrame(dfmap, geometry='geometry')
     # dfmap['geometry'] = dfmap.geometry.apply(lambda x: x.wkt).apply(lambda x: re.sub('"(.*)"', '\\1', x))
