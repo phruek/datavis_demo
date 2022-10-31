@@ -55,39 +55,40 @@ def growthRate():
         width=1000, height=400
     )
     return chart
-def map():
-    dfpop = pd.read_csv('./proportion.csv',low_memory=False)
-    dfpop['name'] = dfpop['Central_Province']
-    dfpop.loc[dfpop['central_order_status']=='Completed']
-    dfComplated = dfpop[dfpop['central_order_status']=='Completed'].groupby(['name'])['proportion'].mean()
-    dfProcessing = dfpop[dfpop['central_order_status']=='Processing'].groupby(['name'])['proportion'].mean()
-    dfFailed = dfpop[dfpop['central_order_status']=='Failed'].groupby(['name'])['proportion'].mean()
-    dfReturned = dfpop[dfpop['central_order_status']=='Returned'].groupby(['name'])['proportion'].mean()
-    alt.pipe = toolz.curried.pipe
-    # dfmap = gpd.read_file('https://bit.ly/thaigeojson')
-    dfmap = pd.read_csv('thaigeo.csv')
-    dfmap['name'] = dfmap['name'].apply(lambda x: 'Nong Bua Lamphu' if x == 'Nong Bua Lam Phu' else x)
-    dfplot = dfmap.merge(dfComplated, on='name', how='left', indicator=True)
-    complatedChart = alt.Chart(dfplot).mark_geoshape().encode(
-        color='proportion:Q',
-        tooltip=['name','proportion']
-    )
-    dfplot = dfmap.merge(dfProcessing, on='name', how='left', indicator=True)
-    processingChart = alt.Chart(dfplot).mark_geoshape().encode(
-        color='proportion:Q',
-        tooltip=['name','proportion']
-    )
-    dfplot = dfmap.merge(dfFailed, on='name', how='left', indicator=True)
-    failedChart = alt.Chart(dfplot).mark_geoshape().encode(
-        color='proportion:Q',
-        tooltip=['name','proportion']
-    )
-    dfplot = dfmap.merge(dfReturned, on='name', how='left', indicator=True)
-    returnChart = alt.Chart(dfplot).mark_geoshape().encode(
-        color='proportion:Q',
-        tooltip=['name','proportion']
-    )
-    return alt.hconcat(complatedChart, processingChart)
+# def map():
+#     dfpop = pd.read_csv('./proportion.csv',low_memory=False)
+#     dfpop['name'] = dfpop['Central_Province']
+#     dfpop.loc[dfpop['central_order_status']=='Completed']
+#     dfComplated = dfpop[dfpop['central_order_status']=='Completed'].groupby(['name'])['proportion'].mean()
+#     dfProcessing = dfpop[dfpop['central_order_status']=='Processing'].groupby(['name'])['proportion'].mean()
+#     dfFailed = dfpop[dfpop['central_order_status']=='Failed'].groupby(['name'])['proportion'].mean()
+#     dfReturned = dfpop[dfpop['central_order_status']=='Returned'].groupby(['name'])['proportion'].mean()
+#     alt.pipe = toolz.curried.pipe
+#     # dfmap = gpd.read_file('https://bit.ly/thaigeojson')
+#     dfmap = pd.read_csv('thaigeo.csv')
+#     dfmap['name'] = dfmap['name'].apply(lambda x: 'Nong Bua Lamphu' if x == 'Nong Bua Lam Phu' else x)
+#     dfplot = dfmap.merge(dfComplated, on='name', how='left', indicator=True)
+    
+#     complatedChart = alt.Chart(dfplot).mark_geoshape().encode(
+#         color='proportion:Q',
+#         tooltip=['name','proportion']
+#     )
+#     dfplot = dfmap.merge(dfProcessing, on='name', how='left', indicator=True)
+#     processingChart = alt.Chart(dfplot).mark_geoshape().encode(
+#         color='proportion:Q',
+#         tooltip=['name','proportion']
+#     )
+#     dfplot = dfmap.merge(dfFailed, on='name', how='left', indicator=True)
+#     failedChart = alt.Chart(dfplot).mark_geoshape().encode(
+#         color='proportion:Q',
+#         tooltip=['name','proportion']
+#     )
+#     dfplot = dfmap.merge(dfReturned, on='name', how='left', indicator=True)
+#     returnChart = alt.Chart(dfplot).mark_geoshape().encode(
+#         color='proportion:Q',
+#         tooltip=['name','proportion']
+#     )
+#     return alt.hconcat(complatedChart, processingChart)
 
 tab1, tab2, tab3, tab4 = st.tabs(['Growth Rate comparison', 'Coloplate Status Map','Coloplate total mean per order','Category Shares'])
 with tab1:
@@ -106,9 +107,9 @@ with tab2:
     # dfFailed = dfpop[dfpop['central_order_status']=='Failed'].groupby(['name'])['proportion'].mean()
     # dfReturned = dfpop[dfpop['central_order_status']=='Returned'].groupby(['name'])['proportion'].mean()
     alt.pipe = toolz.curried.pipe
-    dfmap = gpd.read_file('https://bit.ly/thaigeojson')
+    # dfmap = gpd.read_file('https://bit.ly/thaigeojson')
     
-    # dfmap = pd.read_csv('thaigeo.csv')
+    dfmap = pd.read_csv('thaigeo.csv')
     # dfmap['geometry'] = gpd.GeoSeries.from_wkt(dfmap['geometry'])
     # dfmap = gpd.GeoDataFrame(dfmap, geometry='geometry')
     dfmap['geometry'] = dfmap.geometry.apply(lambda x: x.wkt).apply(lambda x: re.sub('"(.*)"', '\\1', x))
