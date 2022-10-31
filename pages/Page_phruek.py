@@ -5,7 +5,7 @@ import datetime as dt
 import altair as alt
 import toolz
 import geopandas as gpd
-import regex as re
+import re
 
 st.header("Overview Performance")
 st.write("Growth Year on Year comparison")
